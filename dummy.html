@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        #container{
+            width: 800px;
+            background-color: yellow;
+            overflow: hidden;
+            margin: auto;
+            cursor: pointer;
+            position: relative;
+        }
+        #quote.animate {
+            transform: translateX(-90%);
+            transition-property: transform;
+            transition-duration: 9s;
+            transition-timing-function: linear;
+        }
+        .ball{
+            cursor: pointer;
+            background: linear-gradient(45deg, red, green, yellow);
+            width: 5vw;
+            height: 5vw;
+            border-radius: 50%;
+            margin: auto;
+            position: relative;
+            top: 0;
+            transition: top 1s ease-in;
+        }
+        .slide{
+            position: relative;
+            width: 5vw;
+            height: 2.5vh;
+            left: 10vw;
+            background-color: chartreuse;
+            border: 2px solid brown;
+            animation: slide 3s infinite alternate;
+        }
+        @keyframes slide{
+            from{
+                left: 10vw;
+            }
+            to{
+                left: 90vw;
+            }
+        }
+        #train{
+            position: relative;
+        }
+        .slide2{
+            background-color: hsl(0, 70%, 60%);
+            width: 8vw;
+            height: 100%;
+            position: relative;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="quote" style="font-size: large;">To be or not to be, that is the question</div>
+    </div>
+
+    <div class="ball"></div>
+
+    <div class="slide"></div>
+
+    <img id="train" src="https://js.cx/clipart/train.gif" alt="">
+
+    <div style="width: 70vw; height: 5vh; background-color: cyan; margin: auto;">
+        <div class="slide2"></div>
+    </div>
+
+    <script>
+        quote.onclick = function() {
+            let currSec = new Date().getSeconds() % 10;
+            quote.style.transitionDelay = currSec + "s";
+            quote.classList.add('animate');
+        };
+
+        let _ball = document.querySelector(".ball");
+        _ball.onclick = () =>{
+            let time = 1;
+            let H = 50;
+            let f = 0.5;
+            
+            moveBall(time, H);
+            _ball.addEventListener("transitionend", function(){
+                time++;
+                if(time % 2 === 0) H = H * f;
+                moveBall(time, 50-H);
+            });
+        };
+
+        function moveBall(time, ht){
+            if(time % 2){
+                _ball.style.transition= "top 0.5s ease-in";
+                _ball.style.top = "50vh";
+            }
+            else{
+                _ball.style.transition= "top 0.5s ease-out";
+                _ball.style.top = ht + "vh";
+            }
+        }
+
+        let _img_train = document.querySelector("#train");
+        _img_train.onclick = ()=>{
+            let start = Date.now();
+            let timer = setInterval(function(){
+            let timePassed = Date.now() - start;
+            if(timePassed > 2000){
+                clearInterval(timer);
+                return;
+            }
+            _img_train.style.left = timePassed / 5 + "px";
+
+            }, 10);
+        };
+
+        //universal funciton for any kind of animation
+        function animate({timing_func, draw, duration}){
+            let start = performance.now();
+            requestAnimationFrame(function animate_help(curr_time){
+                let x = (curr_time - start) / duration;
+
+                if(x > 1)  x = 1;
+
+                let y = timing_func(x);
+                draw(y);
+
+                if(x < 1) requestAnimationFrame(animate_help);
+            });
+        };
+        //
+
+        let _slide2 = document.querySelector(".slide2");
+        _slide2.onclick = () => {
+            animate({
+                timing_func(x) {
+                    // return Math.pow(curr_time_frac, 2);
+                    // return Math.sin(curr_time_frac);
+                    if(x >= 0 && x <= 0.25){
+                        return x - 4 * Math.pow(x, 2);
+                    }
+                    else if(x >= 0.25 && x <= 0.5){
+                        return 4 * ((x - 0.25) - 4 * Math.pow(x - 0.25, 2));
+                    }
+                    return  4 * Math.pow(x - 0.5, 2);
+                },
+                draw(y){
+                    _slide2.style.left = y * 62 + "vw";
+                },
+                duration: 2000
+            });
+        };
+
+
+        //XMLHttpRequest example
+        // let xhr = new XMLHttpRequest();
+        // xhr.open("GET", "https://opentdb.com/api.php?amount=5&category=19");
+        // xhr.send();
+        // xhr.onload = () => {
+        //     if(xhr.status != 200){
+        //         console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+        //     }
+        //     else{
+        //         console.log(`Done, got ${xhr.response.length} bytes.`);
+        //     }
+        // };
+        // xhr.onprogress = (e) => {
+        //     if(e.lengthComputable){
+        //         console.log(`Downloaded ${e.loaded} bytes of total ${e.total} bytes.`);
+        //     }
+        //     else{
+        //         console.log(`Downloaded ${e.loaded} bytes.`);
+        //     }
+        // };
+        // xhr.onerror = () => {
+        //     console.log("Request failed.");
+        // };
+
+        //json example
+        // let student = {
+        //     name: 'John',
+        //     age: 30,
+        //     isAdmin: false,
+        //     courses: ['html', 'css', 'js'],
+        //     spouse: null
+        // };
+        // let _student = '[{"name": "John", "age": 30, "isAdmin": false, "courses": ["html", "css", "js"], "spouse": null}]';
+        // console.log(JSON.stringify(student));
+        // console.log(JSON.parse(_student)[0].name);
+
+        //track download progress while fetching data
+        // async function trackDownload() {
+        //     let response = await fetch('https://opentdb.com/api.php?amount=5&category=19');
+        //     const reader = response.body.getReader();
+
+        //     //display all headers
+        //     for(const [key, value] of response.headers){
+        //         console.log(key + ": " + value);
+        //     }
+
+        //     let len_received = 0;
+        //     let chunks = [];
+        //     while(true){
+        //         const {done, value} = await reader.read();
+        //         if(done)  break;
+        //         chunks.push(value);
+        //         len_received += value.length;
+
+        //         console.log(`Received ${len_received} bytes.`);
+        //     }
+            
+        //     let chunksAll = new Uint8Array(len_received);
+        //     let i = 0;
+        //     for(chunk of chunks){
+        //         chunksAll.set(chunk, i);
+        //         i += chunk.length;
+        //     }
+
+        //     let _div = document.createElement("div");
+        //     let result = "[" + new TextDecoder("utf-8").decode(chunksAll) + "]";
+        //     let questions = JSON.parse(result);
+        //     _div.innerHTML = questions[0];
+        //     document.body.append(_div);
+        // };
+        // trackDownload();
+
+        //fetch random number of mcqs from opentrivia
+        // async function getData(){
+        //     let response = await fetch("https://opentdb.com/api.php?amount=5&category=19");
+
+        //     if(response.ok){
+        //         //print response headers
+        //         for(const [key, value] of response.headers){
+        //             console.log(key + ": " + value);
+        //         }
+
+        //         let _json = await response.text();
+        //         let _div = document.createElement("div");
+        //         _div.innerHTML = _json;
+        //         document.body.append(_div);
+        //     }
+        //     else{
+        //         alert(response.status);
+        //     }
+        // };
+        // getData();
+        // fetch("https://opentdb.com/api.php?amount=5&category=19&difficulty=medium&type=multiple")
+        // .then(response => response.text())
+        // .then(text => {
+        //     let _div = document.createElement("div");
+        //     _div.innerHTML = text;
+        //     document.body.append(_div);
+        // })
+        // .catch(error => alert(error.message));
+    </script>
+</body>
+</html>

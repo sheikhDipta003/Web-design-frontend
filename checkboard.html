@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkboard</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        
+        .row::after{
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        [class*="col-"]{
+            float: left;
+            border: 2px solid red;
+            width: 100%;
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+            .col-1{width: 8.33%;}
+            .col-2{width: 16.66%;}
+            .col-3{width: 25%;}
+            .col-4{width: 33.33%;}
+            .col-5{width: 41.66%;}
+            .col-6{width: 50%;}
+            .col-7{width: 58.33%;}
+            .col-8{width: 66.66%;}
+            .col-9{width: 75%;}
+            .col-10{width: 83.33%;}
+            .col-11{width: 91.66%;}
+            .col-12{width: 100%;}
+        }
+        .cover{
+            background-image: url("https://wallpaperaccess.com/full/1685418.jpg");
+            background-size: cover;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(7, 1fr);
+            height: 100vh;
+        }
+        .cover > div{
+            animation-name: vanisher;
+            animation-duration: 0.25s;
+            animation-fill-mode: forwards;
+            background-color: white;
+        }
+        .cover > div:nth-child(even){
+            background-color: gray;
+        }
+        @keyframes vanisher{
+            100%{
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="row">
+        <section class="col-12 cover">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </section>
+    </section>
+
+    <script>
+        for(let i = 1; i <= 49; i++){
+            let _nthChild = document.querySelector(`.cover > div:nth-child(${i})`);
+            _nthChild.style.animationDelay = Math.random() * i / 20 + "s";
+        }
+    </script>
+</body>
+</html>

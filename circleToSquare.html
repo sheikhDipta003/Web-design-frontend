@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Becomes Square</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        [class*="col-"]{
+            float: left;
+            border: 2px solid red;
+            width: 100%;
+        }
+        @media only screen and (min-width: 768px){
+            .col-1{width: 8.33%;}
+            .col-2{width: 16.66%;}
+            .col-3{width: 25%;}
+            .col-4{width: 33.33%;}
+            .col-5{width: 41.66%;}
+            .col-6{width: 50%;}
+            .col-7{width: 58.33%;}
+            .col-8{width: 66.66%;}
+            .col-9{width: 75%;}
+            .col-10{width: 83.33%;}
+            .col-11{width: 91.66%;}
+            .col-12{
+                width: 100%;
+                height: 100vh; 
+                background-color: cornflowerblue; 
+                display: flex;
+                justify-content: center; 
+                align-items: center;
+            }
+        }
+        .container{
+            width: 10vw;
+            height: 10vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: rotation 2s linear 2s forwards;
+        }
+        .circle{
+            width: 3vw;
+            height: 3vw;
+            border-radius: 50%;
+            background-color: white;
+            animation: changeRadius 2s ease-in forwards, changeRadius2 0.25s linear 4.1s forwards, changeToRect 0.25s linear 4.35s forwards, changeToTri 0.25s linear 4.6s forwards;
+        }
+        @keyframes changeRadius{
+            0%{
+                width: 3vw;
+                height: 3vw;
+                border-radius: 50%;
+            }
+            25%{
+                width: 1vw;
+                height: 1vw;
+                border-radius: 50%;
+            }
+            75%{
+                width: 5vw;
+                height: 5vw;
+                border-radius: 50%;
+            }
+            100%{
+                width: 0;
+                height: 0;
+            }
+        }
+        @keyframes changeRadius2{
+            0%{
+                width: 3vw;
+                height: 3vw;
+                border-radius: 50%;
+                background-color: coral;
+            }
+            50%{
+                width: 10vw;
+                height: 10vw;
+                border-radius: 50%;
+            }
+            100%{
+                position: absolute;
+                width: 45vw;
+                height: 45vw;
+                border-radius: 50%;
+            }
+        }
+        @keyframes changeToRect {
+            0%{
+                width: 1vw;
+                height: 1vw;
+                border-radius: 0;
+                transform: rotate(45deg);
+                background-color: aqua;
+            }
+            25%{
+                width: 5vw;
+                height: 5vw;
+            }
+            50%{
+                width: 10vw;
+                height: 10vw;
+            }
+            100%{
+                width: 45vw;
+                height: 45vw;
+            }
+        }
+        @keyframes changeToTri {
+            0%{
+                width: 0;
+                height: 0;
+                border-radius: 0;
+                border-left: 1vw solid transparent;
+                border-right: 1vw solid transparent;
+                border-bottom: 1vw solid burlywood;
+                background-color: burlywood;
+            }
+            25%{
+                border-radius: 0;
+                border-left: 5vw solid transparent;
+                border-right: 5vw solid transparent;
+                border-bottom: 5vw solid burlywood;
+            }
+            50%{
+                border-radius: 0;
+                border-left: 10vw solid transparent;
+                border-right: 10vw solid transparent;
+                border-bottom: 10vw solid burlywood;
+            }
+            100%{
+                border-radius: 0;
+                border-left: 45vw solid transparent;
+                border-right: 45vw solid transparent;
+                border-bottom: 45vw solid burlywood;
+            }
+        }
+        .square{
+            width: 1vw;
+            height: 1vw;
+            border-radius: 50%;
+            background-color: white;
+        }
+        @keyframes rotation{
+            0%{
+                transform: rotate(0deg);
+            }
+            25%{
+                transform: rotate(90deg);
+            }
+            50%{
+                transform: rotate(180deg);
+            }
+            75%{
+                transform: rotate(270deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+        #top-left{
+            position: absolute;
+            animation: pos-tl-fr 0.1s linear 2s forwards, pos-bc 0.1s linear 4s forwards;
+        }
+        #top-right{
+            position: absolute;
+            animation: pos-tr-fr 0.1s linear 2s forwards, pos-bc 0.1s linear 4s forwards;
+        }
+        #bt-left{
+            position: absolute;
+            animation: pos-bl-fr 0.1s linear 2s forwards, pos-bc 0.1s linear 4s forwards;
+        }
+        #bt-right{
+            position: absolute;
+            animation: pos-br-fr 0.1s linear 2s forwards, pos-bc 0.1s linear 4s forwards;
+        }
+        @keyframes pos-tl-fr{to{transform: translate(-4.5vw, -4.5vw);}}
+        @keyframes pos-tr-fr{to{transform: translate(4.5vw, -4.5vw);}}
+        @keyframes pos-bl-fr{to{transform: translate(-4.5vw, 4.5vw);}}
+        @keyframes pos-br-fr{to{transform: translate(4.5vw, 4.5vw);}}
+        @keyframes pos-bc{ to{transform: translate(0, 0);background-color: transparent};}
+        .end{
+            position: absolute;
+            width: 8vw;
+            height: 0;
+            bottom: -10vh;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            color: transparent;            
+            animation: reveal 1s linear 4.85s forwards, stretchEND 0.15s linear 5.85s forwards;
+        }
+        @keyframes reveal{
+            from{height: 0; bottom: -10vh;}
+            to{ height: 10vh; bottom: 0; background-color: red; border: none; border-radius: 10px; box-shadow: 10px 10px 10px hsl(0, 30%, 70%);}
+        }
+        @keyframes stretchEND{
+            to{
+                width: 30vw;
+                background-color: transparent;
+                box-shadow: none;
+            }
+        }
+        .e{
+            position: absolute;
+            font-size: calc(10vh);
+            display: flex; justify-content: center; align-items: center;
+            animation: revealE 1s linear 6s forwards;
+        }
+        .n{
+            position: absolute;
+            font-size: calc(10vh);
+            display: flex; justify-content: center; align-items: center;
+            animation: revealN 1s linear 6s forwards;
+        }
+        .d{
+            position: absolute;
+            font-size: calc(10vh);
+            display: flex; justify-content: center; align-items: center;
+            animation: revealD 1s linear 6s forwards;
+        }
+        @keyframes revealE{ 
+            from{left: 2vw; width: 8vw; height: 100%; background-color: red; }
+            to{color: black; left: 0; width: 8vw; height: 100%; background-color: red; border: none; border-radius: 10px; box-shadow: 10px 10px 10px hsl(0, 30%, 70%);}
+         }
+        @keyframes revealN{ 
+            from{width: 8vw; height: 100%; background-color: red;}
+            to{color: black; width: 8vw; height: 100%; background-color: red; border: none; border-radius: 10px; box-shadow: 10px 10px 10px hsl(0, 30%, 70%);}
+        }
+        @keyframes revealD{ 
+            from{right: 2vw; width: 8vw; height: 100%; background-color: red;}
+            to{color: black; right: 0; width: 8vw; height: 100%; background-color: red; border: none; border-radius: 10px; box-shadow: 10px 10px 10px hsl(0, 30%, 70%);}
+         }
+    </style>
+</head>
+<body>
+    <section class="row">
+        <section class="col-12">
+            <div class="container">
+                <div class="circle"></div>
+                <div class="square" id="top-left"></div>
+                <div class="square" id="top-right"></div>
+                <div class="square" id="bt-left"></div>
+                <div class="square" id="bt-right"></div>
+                <section class="end">
+                    <div class="e">E</div>
+                    <div class="n">N</div>
+                    <div class="d">D</div>
+                </section>
+            </div>
+        </section>
+    </section>
+
+    <script>
+        let _circle = document.querySelector(".circle");
+        _circle.addEventListener("animationend", (e) => {
+            e.preventDefault();
+            if(e.animationName === "changeRadius2"){
+                document.querySelector(".col-12").style.backgroundColor = "coral";
+                _circle.style.backgroundColor = "transparent";
+            }
+            else if(e.animationName === "changeToRect"){
+                document.querySelector(".col-12").style.backgroundColor = "aqua";
+                _circle.style.backgroundColor = "transparent";
+            }
+            else if(e.animationName === "changeToTri"){
+                document.querySelector(".col-12").style.backgroundColor = "burlywood";
+                _circle.style.backgroundColor = "transparent";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+body{
+    background-color: antiquewhite;
+}
+nav{
+    text-align: center;
+}
+.navmenu{
+    color: red;
+    font-size: 24px;
+    font-family: cursive;
+    margin: 10px 40px 10px 40px;
+}
+#roadmap-border{
+    border-color: darkgoldenrod;
+    border-radius: 50%;
+    border-width: 5px;
+    border-style: solid;
+}
+a:link{
+    text-decoration: none;
+}
+a:visited{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+a:active{
+    text-decoration: underline;
+}
+aside{
+    text-align: center;
+}
+footer{
+    text-align: right;
+}
+#quoteWrapper{
+    width: 40vw;
+    margin: auto;
+    overflow: hidden;
+}
+#quote{
+    color: darkblue;
+    font-size: 22px;
+    font-family: 'Poor Story', cursive;
+    position: relative;
+    animation-name: movement;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+}
+@keyframes movement{
+    0%{
+        right: -42vw;
+    }
+    50%{
+        right: 0vw;
+    }
+    100%{
+        right: 50vw;
+    }
+}

@@ -1,0 +1,117 @@
+*{
+    box-sizing: border-box;
+}
+.navmenu{
+    color: red;
+    font-size: 24px;
+    font-family: cursive;
+    margin: 10px 40px 10px 40px;
+}
+a:link{
+    text-decoration: none;
+}
+a:visited{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+a:active{
+    text-decoration: underline;
+}
+#main-content{
+    display: grid;
+    grid-template-rows: 40vh 40vh;
+    grid-gap: 10vh;
+}
+.section-headings{
+    margin: 0;
+    background-color: hsl(300, 70%, 70%);
+    color: brown;
+    font-size: 2em;
+    text-align: center;
+}
+.lists{
+    width: 20vw;
+    margin: auto;
+    padding-bottom: 20px;
+}
+li{
+    font-size: 1.5em;
+}
+.yt-channel-names{
+    font-style: italic;
+    font-size: 0.8em;
+}
+.resource-links{
+    font-style: bold;
+    color: blue;
+}
+.resource-links:link{
+    text-decoration: none;
+}
+.resource-links:visited{
+    text-decoration: none;
+}
+.resource-links:hover{
+    text-decoration: underline;
+    color: red;
+}
+.resource-links:active{
+    text-decoration: underline;
+}
+#external-res{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1vw;
+    justify-items: center;
+    align-items: center;
+    background-color: hsl(120, 50%, 70%);
+}
+#notes-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap:wrap;
+}
+#quoteWrapper{
+    width: 40vw;
+    margin: auto;
+    overflow: hidden;
+}
+#quote{
+    color: darkblue;
+    font-size: 16px;
+    font-family: 'Poor Story', cursive;
+    position: relative;
+    animation-name: movement;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+}
+@keyframes movement{
+    0%{
+        right: -42vw;
+    }
+    50%{
+        right: 0vw;
+    }
+    100%{
+        right: 50vw;
+    }
+}
+#back-to-top-btn{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 3vw;
+    height: 3vw;
+    font-size: 50px;
+    font-family: cursive;
+    background-color: chartreuse;
+    border-radius: 50%;
+}
+button:active{
+    color: white;
+}

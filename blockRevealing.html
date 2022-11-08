@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block Revealing Effect</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .row::after{
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        [class*="col-"]{
+            float: left;
+            border: 2px solid red;
+            width: 100%;
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+            .col-1{width: 8.33%;}
+            .col-2{width: 16.66%;}
+            .col-3{width: 25%;}
+            .col-4{width: 33.33%;}
+            .col-5{width: 41.66%;}
+            .col-6{width: 50%;}
+            .col-7{width: 58.33%;}
+            .col-8{width: 66.66%;}
+            .col-9{width: 75%;}
+            .col-10{width: 83.33%;}
+            .col-11{width: 91.66%;}
+            .col-12{width: 100%;}
+        }
+
+        .block-effect {
+            font-size: 6vw;
+        }
+
+        .block-reveal {
+            --t: calc(var(--td) + var(--d));
+
+            color: transparent;
+            padding: 4px;
+
+            position: relative;
+            overflow: hidden;
+
+            animation: revealBlock 0s var(--t) forwards;
+        }
+
+        .block-reveal::after {
+            content: '';
+
+            width: 0%;
+            height: 100%;
+            padding-bottom: 4px;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            background: var(--bc);
+            animation: revealingIn var(--td) var(--d) forwards, revealingOut var(--td) var(--t) forwards;
+        }
+
+
+        /* animations */
+        @keyframes revealBlock {
+            100% {
+                color: black;
+            }
+        }
+
+        @keyframes revealingIn {
+
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes revealingOut {
+
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="row">
+            <section class="col-12" style="height: 100vh; display: flex; justify-content: center; align-items: center;">
+                <h1 class="block-effect" style="--td: 1.2s">
+                    <div class="block-reveal" style="--bc: #4040bf; --d: .1s">Block</div>
+                    <div class="block-reveal" style="--bc: #bf4060; --d: .5s">Revealing Effect</div>
+                </h1>
+            </section>
+        </section>
+    </main>
+</body>
+</html>

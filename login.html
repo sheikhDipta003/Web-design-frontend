@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+    <header>
+    </header>
+
+    <main >
+        <article class="login-form">
+            <form id="_form">
+                <section id="feedback">
+                </section>
+
+                <section>
+                    <label><em>Name</em>
+                    <input type="text" id="username" name="username" required class="userinput">
+                    </label>
+                </section>
+    
+                <section>
+                    <label><em>Academic Session</em>
+                        <select name="ac_session" id="ac_session" class="userinput">
+                            <option selected value="2021-22">2021-22</option>
+                            <option value="2020-21">2020-21</option>
+                            <option value="2019-20">2019-20</option>
+                            <option value="2018-19">2018-19</option>
+                        </select>
+                    </label>
+                </section>
+    
+                <section>
+                    <label><em>Password</em>
+                        <input type="password" id="userpass" name="userpass" required class="userinput">
+                    </label>
+                </section>
+    
+                <section>
+                    <label><em>Message</em>
+                        <textarea id="msg" name="msg" minlength="10" maxlength="100" class="userinput" style="resize: none;"></textarea>
+                    </label>
+                </section>
+    
+                <hr>
+
+                <section>
+                    <label><em>Receive confirmation email?</em>
+                        <input type="checkbox" id="conf_mail" name="conf_mail">
+                    </label>
+                </section>
+
+                <hr>
+    
+                <input type="submit" value="submit" id="submit-btn">
+            </form>
+        </article>
+    </main>
+
+    <footer>
+        <button id="back-btn"><a href="index.html">Return</a></button>
+    </footer>
+
+    <script src="js/login.js"></script>
+
+</body>
+</html>
